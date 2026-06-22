@@ -1,0 +1,5 @@
+project: dbus-broker
+target: fuzz-message
+cmds:
+  - cmd: /mayhem/fuzz-message
+    libfuzzer: true

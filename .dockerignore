@@ -1,0 +1,23 @@
+# .dockerignore for the commit-image build.
+# Goal: bake in the FULL repo (including .git history — the grader uses it),
+# dropping only local build artifacts and editor/OS cruft. Dev image, not minimal.
+
+# ── Build outputs / local cruft ──────────────────────────────────────────────
+# build.sh produces its outputs under /mayhem at build time. NOTE: do NOT exclude the
+# subprojects/*.wrap files — meson needs them to fetch the c-util / Rust git-wrap deps at
+# build time. (A `subprojects/libcdvar-*/` pattern would also eat `libcdvar-1.wrap`, breaking
+# the build.) The meson-cloned subproject checkouts only exist after a local build; a clean CI
+# checkout has just the .wrap files, so there's nothing extra to ignore here.
+build/
+mayhem-build/
+mayhem-tests/
+*.o
+*.a
+*.so
+*.dylib
+**/__pycache__/
+
+# ── Editor / OS noise ────────────────────────────────────────────────────────
+.DS_Store
+*.swp
+*~
